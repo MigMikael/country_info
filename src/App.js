@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+
+import Navigation from './components/Navigation'
+import CountryList from './components/CountryList'
+import Country from './components/Country'
+
+import { Row, Col, Container, Button, Jumbotron } from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <Navigation />
+            <Router>
+                <Switch>
+                    <Route path="/" exact component={MainPage} />
+                    <Route path="/country/:name" exact component={Country} />
+                </Switch>
+            </Router>
+        </div>
+    )
 }
 
-export default App;
+function MainPage() {
+    return (
+        <div>
+            <Row>
+                <Col md={12}>
+                    <Jumbotron fluid>
+                        <Container style={{textAlign: "center"}}>
+                            <h1>Country Info</h1>
+                            <p>
+                                This application made for practice ReactJS & React-Bootstrap
+                            </p>
+                        </Container>
+                    </Jumbotron>
+                </Col>
+            </Row>
+            <Row>
+                <Container>
+                    <CountryList />
+                </Container>
+            </Row>
+        </div>
+    )
+}
+
+export default App
